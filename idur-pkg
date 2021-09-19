@@ -1,0 +1,58 @@
+#!/usr/bin/bash
+
+help="idur-pkg
+Use:
+	idur-pkg <option> <optional>
+Options:
+	tmp                   create /tmp/idur-pkg-tmp folder
+	rm                    remove /tmp/idur-pkg-tmp folder
+	download <link>       download the link
+	read     <link>       read the link
+	rm       <file>       remove the file"
+
+if [ ! -z $1 ]
+then
+	if [ $1 = "tmp" ]
+	then
+		echo "creating tmp folder"
+		cd /tmp/
+		rm -vrf idur-pkg-tmp
+		mkdir -p idur-pkg-tmp
+		cd idur-pkg-tmp
+	elif [ $1 = "rm-tmp" ]
+	then
+		echo "removing tmp folder"
+		cd /tmp/
+		rm -vrf idur-pkg-tmp
+	elif [ $1 = "download" ]
+	then
+		if [ ! -z $2 ]
+		then
+			echo "downloading $2"
+			curl -LO $2
+		else
+			echo "need a link"
+		fi
+	elif [ $1 = "read" ]
+	then
+		if [ ! -z $2 ]
+		then
+			curl -L $2
+		else
+			echo "need a link"
+		fi
+	elif [ $1 = "rm" ]
+	then
+		if [ ! -z $2 ]
+		then
+			rm -vrf $2
+		else
+			echo "need files"
+		fi
+	else
+		echo $help
+	fi
+else
+	echo $help
+fi
+
