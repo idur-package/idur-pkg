@@ -1,14 +1,7 @@
 #!/usr/bin/bash
 
-help="idur-pkg
-Use:
-	idur-pkg <option> <optional>
-Options:
-	tmp                   create /tmp/idur-pkg-tmp folder
-	rm                    remove /tmp/idur-pkg-tmp folder
-	download <link>       download the link
-	read     <link>       read the link
-	rm       <file>       remove the file"
+	
+version="v0.1"
 
 if [ ! -z $1 ]
 then
@@ -19,6 +12,12 @@ then
 		rm -vrf idur-pkg-tmp
 		mkdir -p idur-pkg-tmp
 		cd idur-pkg-tmp
+	elif [ $1 = "-v" ]
+	then
+		echo $version
+	elif [ $1 = "--version" ]
+	then
+		echo $version
 	elif [ $1 = "rm-tmp" ]
 	then
 		echo "removing tmp folder"
@@ -50,9 +49,25 @@ then
 			echo "need files"
 		fi
 	else
-		echo $help
+		echo "idur-pkg
+Use:
+	idur-pkg <option> <optional>
+Options:
+	tmp                   create /tmp/idur-pkg-tmp folder
+	rm                    remove /tmp/idur-pkg-tmp folder
+	download <link>       download the link
+	read     <link>       read the link
+	rm       <file>       remove the file"
 	fi
 else
-	echo $help
+	echo "idur-pkg
+Use:
+	idur-pkg <option> <optional>
+Options:
+	tmp                   create /tmp/idur-pkg-tmp folder
+	rm                    remove /tmp/idur-pkg-tmp folder
+	download <link>       download the link
+	read     <link>       read the link
+	rm       <file>       remove the file"
 fi
 
