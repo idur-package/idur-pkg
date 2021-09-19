@@ -26,9 +26,15 @@ then
 		echo $version
 	elif [ $1 = "rm-tmp" ]
 	then
-		echo "removing tmp folder"
-		cd /tmp/
-		rm -vrf idur-pkg-tmp
+		if [ ! -z $2 ]
+		then
+			echo "removing tmp folder"
+			cd /tmp/
+			rm -vrf idur-$2-tmp
+		else
+			echo "need a name"
+		fi
+		
 	elif [ $1 = "download" ]
 	then
 		if [ ! -z $2 ]
