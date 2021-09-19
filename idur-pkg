@@ -10,7 +10,6 @@ then
 		if [ ! -z $2 ]
 		then
 			echo "creating tmp folder"
-			curl -LO $2
 			cd /tmp/
 			rm -vrf idur-$2-tmp
 			mkdir -p idur-$2-tmp
