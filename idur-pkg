@@ -17,6 +17,14 @@ then
 		else
 			echo "need a name"
 		fi
+	elif [ $1 = "dir-tmp" ]
+	then
+		if [ ! -z $2 ]
+		then
+			echo "idur-$2-tmp"
+		else
+			echo "need a name"
+		fi
 	elif [ $1 = "-v" ]
 	then
 		echo $version
@@ -59,13 +67,36 @@ then
 		else
 			echo "need files"
 		fi
+	elif [ $1 = "uncompress" ]
+	then
+		if [ ! -z $2 ]
+		then
+			if [[ $2 == *.zip ]]
+			then
+				unzip $2
+			elif [[ $2 == *.tar.gz ]]
+			then
+				tar -xvzf $2
+			elif [[ $2 == *.tar.bz2 ]]
+			then
+				tar -xvjf $2
+			elif [[ $2 == *.tar ]]
+			then
+				tar -xvf $2
+			else
+				echo "not compress file"
+			fi
+		else
+			echo "need files"
+		fi
 	else
 		echo "idur-pkg
 Use:
 	idur-pkg <option> <optional>
 Options:
 	tmp                   create /tmp/idur-pkg-tmp folder
-	rm                    remove /tmp/idur-pkg-tmp folder
+	rm-tmp                remove /tmp/idur-pkg-tmp folder
+	dir-tmp               print /tmp/idur-pkg-tmp folder
 	download <link>       download the link
 	read     <link>       read the link
 	rm       <file>       remove the file"
