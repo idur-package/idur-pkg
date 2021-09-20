@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 	
-version="v0.3"
+version="v0.4"
 
 if [ ! -z $1 ]
 then
@@ -94,12 +94,13 @@ then
 Use:
 	idur-pkg <option> <optional>
 Options:
-	tmp                   create /tmp/idur-pkg-tmp folder
-	rm-tmp                remove /tmp/idur-pkg-tmp folder
-	dir-tmp               print /tmp/idur-pkg-tmp folder
-	download <link>       download the link
-	read     <link>       read the link
-	rm       <file>       remove the file"
+	tmp                     create /tmp/idur-pkg-tmp folder
+	rm-tmp                  remove /tmp/idur-pkg-tmp folder
+	dir-tmp                 print /tmp/idur-pkg-tmp folder
+	download   <link>       download the link
+	read       <link>       read the link
+	rm         <file>       remove the file
+	uncompress <file>       uncompress files"
 	fi
 else
 	echo "idur-pkg
