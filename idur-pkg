@@ -7,9 +7,15 @@ all=" $2 $3 $4 $5 $6 $7 $8 $9 "
 first=$1
 second=$2
 
-if [ $first = "tmp" ]
+if [ -z $1 ]
 then
-	if [ ! $second = "" ]
+	first=" "
+	second=" "
+fi
+
+if [[ $first = "tmp" ]]
+then
+	if [[ ! $second = "" ]]
 	then
 		/usr/bin/echo "creating tmp folder"
 		cd /tmp/
@@ -19,28 +25,28 @@ then
 	else
 		/usr/bin/echo "need a name"
 	fi
-elif [ $first = "dir-tmp" ]
+elif [[ $first = "dir-tmp" ]]
 then
-	if [ ! $second = "" ]
+	if [[ ! $second = "" ]]
 	then
 		/usr/bin/echo "idur-$second-tmp"
 	else
 		/usr/bin/echo "need a name"
 	fi
-elif [ $first = "dp" ]
+elif [[ $first = "dp" ]]
 then
-	if [ ! $second = "" ]
+	if [[ ! $second = "" ]]
 	then
 		/usr/bin/echo "/tmp/idur-$second-tmp/"
 	else
 		/usr/bin/echo "need a name"
 	fi
-elif [ $first = "-v" ] || [ $first = "--version" ]
+elif [[ $first = "-v" ]] || [[ $first = "--version" ]]
 then
 	/usr/bin/echo $version
-elif [ $first = "rm-tmp" ]
+elif [[ $first = "rm-tmp" ]]
 then
-	if [ ! $second = "" ]
+	if [[ ! $second = "" ]]
 	then
 		/usr/bin/echo "removing tmp folder"
 		cd /tmp/
@@ -49,42 +55,42 @@ then
 		/usr/bin/echo "need a name"
 	fi
 	
-elif [ $first = "download" ]
+elif [[ $first = "download" ]]
 then
-	if [ ! $second = "" ]
+	if [[ ! $second = "" ]]
 	then
 		/usr/bin/echo "downloading $second"
 		/usr/bin/curl -LO $second
 	else
 		/usr/bin/echo "need a link"
 	fi
-elif [ $first = "read" ]
+elif [[ $first = "read" ]]
 then
-	if [ ! $second = "" ]
+	if [[ ! $second = "" ]]
 	then
 		/usr/bin/curl -L $second
 	else
 		echo "need a link"
 	fi
-elif [ $first = "rm" ]
+elif [[ $first = "rm" ]]
 then
-	if [ ! $second = "" ]
+	if [[ ! $second = "" ]]
 	then
 		/usr/bin/rm -vrf $all
 	else
 		echo "need files"
 	fi
-elif [ $first = "uncompress" ]
+elif [[ $first = "uncompress" ]]
 then
-	if [ ! $second = ""]
+	if [[ ! $second = "" ]]
 	then
 		/usr/bin/dunpress $all
 	else
 		/usr/bin/echo "need files"
 	fi
-elif [ $first = "exec" ]
+elif [[ $first = "exec" ]]
 then
-	if [ ! $second = "" ]
+	if [[ ! $second = "" ]]
 	then
 		/usr/bin/chmod a+x $second
 	else
