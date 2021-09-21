@@ -3,114 +3,105 @@
 	
 version="v0.4"
 
-if [ ! -z $1 ]
+all=" $2 $3 $4 $5 $6 $7 $8 $9 "
+first=$1
+second=$2
+
+if [ $first = "tmp" ]
 then
-	if [ $1 = "tmp" ]
+	if [ ! $second = "" ]
 	then
-		if [ ! -z $2 ]
-		then
-			echo "creating tmp folder"
-			cd /tmp/
-			rm -vrf idur-$2-tmp
-			mkdir -p idur-$2-tmp
-			cd idur-$2-tmp
-		else
-			echo "need a name"
-		fi
-	elif [ $1 = "dir-tmp" ]
-	then
-		if [ ! -z $2 ]
-		then
-			echo "idur-$2-tmp"
-		else
-			echo "need a name"
-		fi
-	elif [ $1 = "-v" ]
-	then
-		echo $version
-	elif [ $1 = "--version" ]
-	then
-		echo $version
-	elif [ $1 = "rm-tmp" ]
-	then
-		if [ ! -z $2 ]
-		then
-			echo "removing tmp folder"
-			cd /tmp/
-			rm -vrf idur-$2-tmp
-		else
-			echo "need a name"
-		fi
-		
-	elif [ $1 = "download" ]
-	then
-		if [ ! -z $2 ]
-		then
-			echo "downloading $2"
-			curl -LO $2
-		else
-			echo "need a link"
-		fi
-	elif [ $1 = "read" ]
-	then
-		if [ ! -z $2 ]
-		then
-			curl -L $2
-		else
-			echo "need a link"
-		fi
-	elif [ $1 = "rm" ]
-	then
-		if [ ! -z $2 ]
-		then
-			rm -vrf $2
-		else
-			echo "need files"
-		fi
-	elif [ $1 = "uncompress" ]
-	then
-		if [ ! -z $2 ]
-		then
-			if [[ $2 == *.zip ]]
-			then
-				unzip $2
-			elif [[ $2 == *.tar.gz ]]
-			then
-				tar -xvzf $2
-			elif [[ $2 == *.tar.bz2 ]]
-			then
-				tar -xvjf $2
-			elif [[ $2 == *.tar ]]
-			then
-				tar -xvf $2
-			else
-				echo "not compress file"
-			fi
-		else
-			echo "need files"
-		fi
+		/usr/bin/echo "creating tmp folder"
+		cd /tmp/
+		/usr/bin/rm -vrf idur-$second-tmp
+		/usr/bin/mkdir -p idur-$second-tmp
+		cd idur-$second-tmp
 	else
-		echo "idur-pkg
-Use:
-	idur-pkg <option> <optional>
-Options:
-	tmp                     create /tmp/idur-pkg-tmp folder
-	rm-tmp                  remove /tmp/idur-pkg-tmp folder
-	dir-tmp                 print /tmp/idur-pkg-tmp folder
-	download   <link>       download the link
-	read       <link>       read the link
-	rm         <file>       remove the file
-	uncompress <file>       uncompress files"
+		/usr/bin/echo "need a name"
+	fi
+elif [ $first = "dir-tmp" ]
+then
+	if [ ! $second = "" ]
+	then
+		/usr/bin/echo "idur-$second-tmp"
+	else
+		/usr/bin/echo "need a name"
+	fi
+elif [ $first = "dp" ]
+then
+	if [ ! $second = "" ]
+	then
+		/usr/bin/echo "/tmp/idur-$second-tmp/"
+	else
+		/usr/bin/echo "need a name"
+	fi
+elif [ $first = "-v" ] || [ $first = "--version" ]
+then
+	/usr/bin/echo $version
+elif [ $first = "rm-tmp" ]
+then
+	if [ ! $second = "" ]
+	then
+		/usr/bin/echo "removing tmp folder"
+		cd /tmp/
+		/usr/bin/rm -vrf idur-$second-tmp
+	else
+		/usr/bin/echo "need a name"
+	fi
+	
+elif [ $first = "download" ]
+then
+	if [ ! $second = "" ]
+	then
+		/usr/bin/echo "downloading $second"
+		/usr/bin/curl -LO $second
+	else
+		/usr/bin/echo "need a link"
+	fi
+elif [ $first = "read" ]
+then
+	if [ ! $second = "" ]
+	then
+		/usr/bin/curl -L $second
+	else
+		echo "need a link"
+	fi
+elif [ $first = "rm" ]
+then
+	if [ ! $second = "" ]
+	then
+		/usr/bin/rm -vrf $all
+	else
+		echo "need files"
+	fi
+elif [ $first = "uncompress" ]
+then
+	if [ ! $second = ""]
+	then
+		/usr/bin/dunpress $all
+	else
+		/usr/bin/echo "need files"
+	fi
+elif [ $first = "exec" ]
+then
+	if [ ! $second = "" ]
+	then
+		/usr/bin/chmod a+x $second
+	else
+		/usr/bin/echo "need files"
 	fi
 else
-	echo "idur-pkg
+	/usr/bin/echo "idur-pkg
 Use:
 	idur-pkg <option> <optional>
 Options:
-	tmp                   create /tmp/idur-pkg-tmp folder
-	rm                    remove /tmp/idur-pkg-tmp folder
-	download <link>       download the link
-	read     <link>       read the link
-	rm       <file>       remove the file"
+	tmp             <name>       create /tmp/idur-pkg-tmp folder
+	rm-tmp          <name>       remove /tmp/idur-pkg-tmp folder
+	dp              <name>       print /tmp/idur-pkg-tmp folder
+	download        <link>       download the link
+	read            <link>       read the link
+	rm              <file>       remove the file
+	uncompress      <file>       uncompress files
+	exec            <file>       make executable"
 fi
 
