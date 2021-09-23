@@ -92,7 +92,15 @@ elif [[ $first = "exec" ]]
 then
 	if [[ ! $second = "" ]]
 	then
-		/usr/bin/chmod a+x $second
+		/usr/bin/chmod a+x -R $second
+	else
+		/usr/bin/echo "need files"
+	fi
+elif [[ $first = "mod" ]]
+then
+	if [[ ! $second = "" ]]
+	then
+		/usr/bin/chmod a+rw -R $second
 	else
 		/usr/bin/echo "need files"
 	fi
@@ -108,6 +116,9 @@ Options:
 	read            <link>       read the link
 	rm              <file>       remove the file
 	uncompress      <file>       uncompress files
-	exec            <file>       make executable"
+	exec            <file>       make executable
+	mod             <file>       all can write the files
+	                             (useful to programs that
+	                             save data in its folder)"
 fi
 
