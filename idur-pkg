@@ -6,6 +6,7 @@ version="v0.6"
 all=" $2 $3 $4 $5 $6 $7 $8 $9 "
 first=$1
 second=$2
+third=$3
 
 if [ -z $1 ]
 then
@@ -104,6 +105,14 @@ then
 	else
 		/usr/bin/echo "need files"
 	fi
+elif [[ $first = "copy" ]]
+then
+	if [[ ! $second = "" ]] && [[ ! $third = "" ]]
+	then
+		cp -vr $second $third
+	else
+		/usr/bin/echo "idur-pkg copy <initialfile> <newfile>"
+	fi
 else
 	/usr/bin/echo "idur-pkg
 Use:
@@ -119,6 +128,7 @@ Options:
 	exec            <file>       make executable
 	mod             <file>       all can write the files
 	                             (useful to programs that
-	                             save data in its folder)"
+	                             save data in its folder)
+	copy <initialfile> <newfile> copy initial file to new file"
 fi
 
